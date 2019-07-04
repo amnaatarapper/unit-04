@@ -21,11 +21,24 @@ class Game{
     }
 
     getRandomPhrase() {
-
         const index = Math.floor(Math.random() * this.phrases.length);
-        console.log(index)
-        console.log(this.phrases[index])
-
-        
+        const phrase = this.phrases[index].phrase;
+        return phrase
     }
+
+    /**
+     * Begins game by selecting a random phrase and displaying it to user
+     */
+    startGame() {
+        const container = document.querySelector('.main-container');
+        const startButton = document.querySelector('#overlay button');
+        
+        startButton.addEventListener('click', () => {
+            container.firstChild.remove();
+            this.activePhrase = this.getRandomPhrase();
+        });
+
+        phrase.addPhraseToDisplay();
+    };
+
 }
