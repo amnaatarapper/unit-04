@@ -24,7 +24,7 @@ class Phrase{
                 li.textContent= letter;
                 li.classList.add('hide', 'letter', letter);
                 ul.appendChild(li)
-                console.log(letter);
+               
             }
 
         }

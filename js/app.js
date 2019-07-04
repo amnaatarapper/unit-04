@@ -3,12 +3,22 @@
  * app.js */
 
 const game = new Game();
-const phrase = new Phrase(game.getRandomPhrase());
-
-game.startGame();
 
 
-console.log(`Active Phrase - phrase: ${game.activePhrase}`);
+const startButton = document.querySelector('#overlay button');
+
+startButton.addEventListener('click', () => { 
+    game.startGame();
+    console.log(`Active Phrase - phrase: ${game.activePhrase}`);
+})
+
+game.handleInteraction();
+
+
+
+
+
+
 
 
 
