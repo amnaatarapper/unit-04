@@ -68,7 +68,9 @@ class Game{
     }
 
     removeLife() {
-
+        const tries = document.querySelectorAll('img[alt=\'Heart Icon\']');
+        tries[tries.length -1].src = 'images/lostHeart.png';
+        tries[tries.length -1].alt = 'Heart Lost';
     }
 
     showMatchedLetter(letter) {

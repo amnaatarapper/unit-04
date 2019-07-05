@@ -15,8 +15,8 @@ startButton.addEventListener('click', () => {
 keyboard.forEach( key => {
     key.addEventListener('click', event => {
         const pressedKey = event.target;
-        console.log(pressedKey)
-        console.log(phrase.checkLetter(pressedKey.textContent))
+        //console.log(pressedKey)
+        //console.log(phrase.checkLetter(pressedKey.textContent))
 
         game.handleInteraction(pressedKey);
         
