@@ -40,7 +40,18 @@ class Phrase {
     };
 
 
-    showMatchedLetter(li) {
-        li.classList.replace('hide', 'show');
-    }
+    showMatchedLetter(letter) {
+        
+     
+            const list = document.querySelectorAll('li');
+    
+            for ( let li of list) {
+                if (li.textContent === letter){  
+                    li.classList.add('show');
+                }
+            }
+            
+
+        }
+
 }

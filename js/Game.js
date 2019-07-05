@@ -59,10 +59,12 @@ class Game{
         
         if(phrase.checkLetter(key.textContent)){
             key.classList += ' chosen'
-            this.showMatchedLetter(key.textContent);
+            phrase.showMatchedLetter(key.textContent);
         } else {
             key.classList += ' wrong';
             this.removeLife();
+            this.missed++
+            this.check
         }
         
     }
