@@ -30,60 +30,58 @@ class Game{
      * Begins game by selecting a random phrase and displaying it to user
      */
     startGame() {
+
         const container = document.querySelector('.main-container');
         container.firstElementChild.remove();
-        this.activePhrase = this.getRandomPhrase();
-        const phrase = new Phrase(this.activePhrase);
-        phrase.addPhraseToDisplay();  
+    
+        game.activePhrase = game.getRandomPhrase();
+        phrase.phrase = game.activePhrase;
+        phrase.addPhraseToDisplay();
+    
+        console.log(`Active Phrase - phrase: ${game.activePhrase}`);
     };
 
-
     /* 
-    ● The clicked/chosen letter must be captured.
-    ● The clicked letter must be checked against the phrase for a match.
-    ● If there’s a match, the letter must be displayed on screen instead of the placeholder.
-    ● If there’s no match, the game must remove a life from the scoreboard.
-    ● The game should check if the player has won the game by revealing all of the letters in
-    the phrase or if the game is lost because the player is out of lives.
-    ● If the game is won or lost, a message should be displayed on screen.
-    
+    Disables the selected letter's onscreen keyboard button
+    If the phrase does not include the guessed letter, 
+    the wrong CSS class is added to the selected letter's 
+    keyboard button and the removeLife() method is called
+    If the phrase includes the guessed letter, 
+    the chosen CSS class is added to the selected letter's keyboard button,
+    the showMatchedLetter() method is called on the phrase,
+
+    and the checkForWin() method is called. If the player has won the game, 
+    the gameOver() method is called
     */
-    handleInteraction() {
-        const keyboard = document.querySelector('#qwerty');
+    handleInteraction(key) {
 
-        keyboard.addEventListener('click', e => {
-            const ul = document.querySelector('ul');
-            console.log(ul)
-            const pressedKey = e.target.textContent;
-            console.log(e.target.textContent);
-
-            const phrase = [...this.activePhrase];
-            const matchedIndexes = [];
-
-            phrase.forEach( (element, index) => {
-                if (element === pressedKey) {
-                    
-                    ul.children[index].classList.add('show');
-
-                }
-            });
-
-
-
-
-
-            
-            console.log(matchedIndexes)
-            
-
-            
-
-
-
-
-
-        })
+        key.disabled = true;
+        
+        if(phrase.checkLetter(key.textContent)){
+            key.classList += ' chosen'
+            this.showMatchedLetter(key.textContent);
+        } else {
+            key.classList += ' wrong';
+            this.removeLife();
+        }
+        
     }
+
+    removeLife() {
+
+    }
+
+    showMatchedLetter(letter) {
+        const list = document.querySelectorAll('li');
+
+        for ( let li of list) {
+            if (li.textContent === letter) {
+                li.classList.add('show');
+            }
+        }
+        
+    }
+    
         
     };
 

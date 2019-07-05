@@ -2,7 +2,7 @@
  * Project 4 - OOP Game App
  * Phrase.js */
 
-class Phrase{
+class Phrase {
     constructor(phrase) {
         this.phrase = phrase.toLowerCase();
     }
@@ -28,5 +28,19 @@ class Phrase{
             }
 
         }
+    }
+    
+    
+    checkLetter(letter) {
+       if ([...this.phrase].indexOf(letter) !== -1 ) {
+           return true
+       } else {
+           return false
+       }
+    };
+
+
+    showMatchedLetter(li) {
+        li.classList.replace('hide', 'show');
     }
 }
