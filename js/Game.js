@@ -41,18 +41,7 @@ class Game{
         console.log(`Active Phrase - phrase: ${game.activePhrase}`);
     };
 
-    /* 
-    Disables the selected letter's onscreen keyboard button
-    If the phrase does not include the guessed letter, 
-    the wrong CSS class is added to the selected letter's 
-    keyboard button and the removeLife() method is called
-    If the phrase includes the guessed letter, 
-    the chosen CSS class is added to the selected letter's keyboard button,
-    the showMatchedLetter() method is called on the phrase,
-
-    and the checkForWin() method is called. If the player has won the game, 
-    the gameOver() method is called
-    */
+    
     handleInteraction(key) {
 
         key.disabled = true;
@@ -60,11 +49,13 @@ class Game{
         if(phrase.checkLetter(key.textContent)){
             key.classList += ' chosen'
             phrase.showMatchedLetter(key.textContent);
+            this.checkForWin();
         } else {
             key.classList += ' wrong';
             this.removeLife();
             this.missed++
             this.check
+            this.checkForWin();
         }
         
     }
@@ -75,17 +66,13 @@ class Game{
         tries[tries.length -1].alt = 'Heart Lost';
     }
 
-    showMatchedLetter(letter) {
-        const list = document.querySelectorAll('li');
-
-        for ( let li of list) {
-            if (li.textContent === letter) {
-                li.classList.add('show');
-            }
-        }
+    checkForWin() {
         
     }
     
+    gameOver() {
+
+    }
         
     };
 
