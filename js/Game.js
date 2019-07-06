@@ -11,11 +11,11 @@ class Game{
 
     createPhrase() { 
         const phrases = [
-            {phrase: 'this is so cool'},
-            {phrase: 'this is so cool'},
-            {phrase: 'this is so cool'},
-            {phrase: 'this is so cool'},
-            {phrase: 'this is so cool'}];
+            {phrase: 'this is cookies'},
+            {phrase: 'this is cookies'},
+            {phrase: 'this is cookies'},
+            {phrase: 'this is cookies'},
+            {phrase: 'this is cookies'}];
 
             return phrases
     }
@@ -32,7 +32,7 @@ class Game{
     startGame() {
 
         const container = document.querySelector('.main-container');
-        container.firstElementChild.remove();
+        container.firstElementChild.style.display = 'none';
     
         game.activePhrase = game.getRandomPhrase();
         phrase.phrase = game.activePhrase;
@@ -48,14 +48,13 @@ class Game{
         
         if(phrase.checkLetter(key.textContent)){
             key.classList += ' chosen'
-            phrase.showMatchedLetter(key.textContent);
+            const isMatch = phrase.showMatchedLetter(key.textContent);
             this.checkForWin();
         } else {
             key.classList += ' wrong';
             this.removeLife();
             this.missed++
-            this.check
-            this.checkForWin();
+            this.gameOver();
         }
         
     }
@@ -64,15 +63,33 @@ class Game{
         const tries = document.querySelectorAll('img[alt=\'Heart Icon\']');
         tries[tries.length -1].src = 'images/lostHeart.png';
         tries[tries.length -1].alt = 'Heart Lost';
+
+        if (!tries.length){
+            this.gameOver();
+        }
     }
 
     checkForWin() {
+        const letters = [...this.activePhrase];
+        const letterCount = letters.filter( element => element !== ' ').length;
+        const shownLettersCount = document.querySelectorAll('.show').length;
+
+        if (shownLettersCount === letterCount) {
+            return true
+        } else {
+            return false
+        }
         
+
+
+
+
     }
     
     gameOver() {
 
     }
+
         
     };
 
