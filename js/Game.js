@@ -26,9 +26,7 @@ class Game{
         return phrase
     }
 
-    /**
-     * Begins game by selecting a random phrase and displaying it to user
-     */
+    
     startGame() {
 
         const container = document.querySelector('.main-container');
@@ -49,7 +47,7 @@ class Game{
         if(phrase.checkLetter(key.textContent)){
             key.classList += ' chosen'
             const isMatch = phrase.showMatchedLetter(key.textContent);
-            this.checkForWin();
+            this.gameOver();
         } else {
             key.classList += ' wrong';
             this.removeLife();
@@ -79,15 +77,54 @@ class Game{
         } else {
             return false
         }
-        
-
-
-
-
     }
     
     gameOver() {
 
+        const resetGame = () => {
+            this.missed = 0;
+            const ul = document.querySelector('ul');
+            ul.innerHTML = '';
+
+            console.log('ul clear')
+            
+            const keyboard = document.querySelectorAll('button.key');
+            for (let i = 0; i < keyboard.length; i++) {
+                keyboard[i].className = 'key';
+                keyboard[i].disabled = '';
+                console.log('keyboard clear')
+            }
+
+            const hearts = document.querySelectorAll('li > img');
+            for (let i = 0; i < hearts.length; i++) {
+                hearts[i].src = 'images/liveHeart.png';
+                hearts[i].alt = 'Heart Icon';
+                console.log('Hearts clear')
+            }
+
+            console.log('Reset Success')
+
+        };
+
+
+
+        if(this.checkForWin() === true)  {
+            const overlay = document.querySelector('#overlay');
+            overlay.style.display = '';
+            overlay.className = 'win';
+            document.querySelector('#game-over-message').textContent = 'GG! You won :D';
+            console.log('Yay!!!')
+            resetGame();
+
+        } else {
+            if (this.missed === 5) {
+                overlay.style.display = '';
+                overlay.className = 'lose';
+                document.querySelector('#game-over-message').textContent = 'You lost, wish you luck for next one :D';
+                console.log('Nay!!!')
+                resetGame();
+            }
+        }
     }
 
         
