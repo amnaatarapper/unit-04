@@ -2,22 +2,32 @@
  * Project 4 - OOP Game App
  * Game.js */
 
-class Game{
+class Game {
     constructor() {
         this.missed = 0;
         this.phrases = this.createPhrase();
         this.activePhrase = null;
     }
 
-    createPhrase() { 
-        const phrases = [
-            {phrase: 'this is cookies'},
-            {phrase: 'this is cookies'},
-            {phrase: 'this is cookies'},
-            {phrase: 'this is cookies'},
-            {phrase: 'this is cookies'}];
+    createPhrase() {
+        const phrases = [{
+                phrase: 'this is cookies'
+            },
+            {
+                phrase: 'this is cookies'
+            },
+            {
+                phrase: 'this is cookies'
+            },
+            {
+                phrase: 'this is cookies'
+            },
+            {
+                phrase: 'this is cookies'
+            }
+        ];
 
-            return phrases
+        return phrases
     }
 
     getRandomPhrase() {
@@ -26,25 +36,24 @@ class Game{
         return phrase
     }
 
-    
     startGame() {
 
         const container = document.querySelector('.main-container');
         container.firstElementChild.style.display = 'none';
-    
+
         game.activePhrase = game.getRandomPhrase();
         phrase.phrase = game.activePhrase;
         phrase.addPhraseToDisplay();
-    
+
         console.log(`Active Phrase - phrase: ${game.activePhrase}`);
     };
 
-    
+
     handleInteraction(key) {
 
         key.disabled = true;
-        
-        if(phrase.checkLetter(key.textContent)){
+
+        if (phrase.checkLetter(key.textContent)) {
             key.classList += ' chosen'
             const isMatch = phrase.showMatchedLetter(key.textContent);
             this.gameOver();
@@ -54,22 +63,22 @@ class Game{
             this.missed++
             this.gameOver();
         }
-        
+
     }
 
     removeLife() {
         const tries = document.querySelectorAll('img[alt=\'Heart Icon\']');
-        tries[tries.length -1].src = 'images/lostHeart.png';
-        tries[tries.length -1].alt = 'Heart Lost';
+        tries[tries.length - 1].src = 'images/lostHeart.png';
+        tries[tries.length - 1].alt = 'Heart Lost';
 
-        if (!tries.length){
+        if (!tries.length) {
             this.gameOver();
         }
     }
 
     checkForWin() {
         const letters = [...this.activePhrase];
-        const letterCount = letters.filter( element => element !== ' ').length;
+        const letterCount = letters.filter(element => element !== ' ').length;
         const shownLettersCount = document.querySelectorAll('.show').length;
 
         if (shownLettersCount === letterCount) {
@@ -78,7 +87,7 @@ class Game{
             return false
         }
     }
-    
+
     gameOver() {
 
         const resetGame = () => {
@@ -87,7 +96,7 @@ class Game{
             ul.innerHTML = '';
 
             console.log('ul clear')
-            
+
             const keyboard = document.querySelectorAll('button.key');
             for (let i = 0; i < keyboard.length; i++) {
                 keyboard[i].className = 'key';
@@ -108,7 +117,7 @@ class Game{
 
 
 
-        if(this.checkForWin() === true)  {
+        if (this.checkForWin() === true) {
             const overlay = document.querySelector('#overlay');
             overlay.style.display = '';
             overlay.className = 'win';
@@ -127,6 +136,5 @@ class Game{
         }
     }
 
-        
-    };
 
+};
