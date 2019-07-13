@@ -1,7 +1,3 @@
-/* Treehouse FSJS Techdegree
- * Project 4 - OOP Game App
- * Game.js */
-
 class Game{
     constructor() {
         this.missed = 0;
@@ -9,44 +5,50 @@ class Game{
         this.activePhrase = null;
     }
 
+    // returns an array of objects holding phrases values
     createPhrase() { 
         const phrases = [
-            {phrase: 'this is cookies'},
-            {phrase: 'this is cookies'},
-            {phrase: 'this is cookies'},
-            {phrase: 'this is cookies'},
-            {phrase: 'this is cookies'}];
+            {phrase: 'microsoft vscode'},
+            {phrase: 'apple macbook pro'},
+            {phrase: 'adobe photoshop'},
+            {phrase: 'microsoft office'},
+            {phrase: 'adobe brackets'}
+        ];
 
             return phrases
     }
 
+    // returns a string out of a random calculated index from an array of objects
     getRandomPhrase() {
         const index = Math.floor(Math.random() * this.phrases.length);
         const phrase = this.phrases[index].phrase;
         return phrase
     }
 
-    
+    // set and display(addPhraseToDisplay) a string value from getRandomPhrase method
     startGame() {
 
         const container = document.querySelector('.main-container');
         container.firstElementChild.style.display = 'none';
     
-        game.activePhrase = game.getRandomPhrase();
-        phrase.phrase = game.activePhrase;
+        this.activePhrase = this.getRandomPhrase();
+        phrase.phrase = this.activePhrase;
         phrase.addPhraseToDisplay();
-    
-        console.log(`Active Phrase - phrase: ${game.activePhrase}`);
+        
+        console.log(`Active Phrase - phrase: ${this.activePhrase}`);
     };
 
-    
+    // disable the pressed key on player interaction
+    // call checkLetter(returns true or false) method on pressed keys 
+    // add appropriate classnames on matching or wrong keys
+  
     handleInteraction(key) {
 
         key.disabled = true;
         
         if(phrase.checkLetter(key.textContent)){
             key.classList += ' chosen'
-            const isMatch = phrase.showMatchedLetter(key.textContent);
+            phrase.showMatchedLetter(key.textContent);
             this.gameOver();
         } else {
             key.classList += ' wrong';
@@ -56,6 +58,9 @@ class Game{
         }
         
     }
+
+    
+    // takes off a life in case the user presses the wrong key
 
     removeLife() {
         const tries = document.querySelectorAll('img[alt=\'Heart Icon\']');
@@ -67,6 +72,7 @@ class Game{
         }
     }
 
+    // returns true or false after comparing shown phrase letters against remaining letters
     checkForWin() {
         const letters = [...this.activePhrase];
         const letterCount = letters.filter( element => element !== ' ').length;
@@ -78,6 +84,8 @@ class Game{
             return false
         }
     }
+    
+    // handles win or lose messages and resets the game
     
     gameOver() {
 
@@ -105,8 +113,6 @@ class Game{
             console.log('Reset Success')
 
         };
-
-
 
         if(this.checkForWin() === true)  {
             const overlay = document.querySelector('#overlay');

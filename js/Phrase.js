@@ -1,12 +1,11 @@
-/* Treehouse FSJS Techdegree
- * Project 4 - OOP Game App
- * Phrase.js */
+
 
 class Phrase {
     constructor(phrase) {
         this.phrase = phrase.toLowerCase();
     }
     
+    // add phrase letter by letter to the display 
     addPhraseToDisplay() {
 
         const ul = document.querySelector('ul');
@@ -30,7 +29,7 @@ class Phrase {
         }
     }
     
-    
+    // returns true or false after comparing shown letters against ones from player's interaction
     checkLetter(letter) {
        if ([...this.phrase].indexOf(letter) !== -1 ) {
            return true
@@ -39,7 +38,7 @@ class Phrase {
        }
     };
 
-
+    // show matched player's letters
     showMatchedLetter(letter) {
         
      
